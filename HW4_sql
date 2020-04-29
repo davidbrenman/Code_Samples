@@ -1,0 +1,22 @@
+-- Question 1: What are the average values of metal ores, fossil fuels, and minerals from our dataset (1970-2017)?
+SELECT AVG(metal_ores_tonnes) from homework3_schema.us_resources;
+SELECT AVG(fossil_fuels_tonnes) from homework3_schema.us_resources;
+SELECT AVG(minerals_tonnes) from homework3_schema.us_resources;
+
+-- Question 2: What is the maximum of metal ores, fossil fuels, and minerals during this time period?
+SELECT MAX(metal_ores_tonnes) from homework3_schema.us_resources;
+SELECT MAX(fossil_fuels_tonnes) from homework3_schema.us_resources;
+SELECT MAX(minerals_tonnes) from homework3_schema.us_resources;
+
+-- Question 3: In what year did the US have the minimum amount of metal ores, fossil fuels, and minerals?
+SELECT year from homework3_schema.us_resources GROUP BY year ORDER BY metal_ores_tonnes LIMIT 1;
+SELECT year from homework3_schema.us_resources GROUP BY year ORDER BY fossil_fuels_tonnes LIMIT 1;
+SELECT year from homework3_schema.us_resources GROUP BY year ORDER BY minerals_tonnes LIMIT 1;
+
+-- Create indices on each column of our table
+CREATE INDEX ON homework3_schema.us_resources (metal_ores_tonnes);
+CREATE INDEX ON homework3_schema.us_resources (fossil_fuels_tonnes);
+CREATE INDEX ON homework3_schema.us_resources (minerals_tonnes);
+
+-- Explain the query execution from one of our queries to gain insight as to what is going on "behind the scenes"
+EXPLAIN SELECT year from homework3_schema.us_resources GROUP BY year ORDER BY metal_ores_tonnes LIMIT 1;

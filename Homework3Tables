@@ -1,0 +1,8 @@
+CREATE TABLE homework3_schema.us_resources_test
+
+(
+	year Integer PRIMARY KEY NOT NULL CHECK( year>=1970 AND year<=2018),
+	metal_ores_tonnes BIGINT NOT NULL,
+	fossil_fuels_tonnes BIGINT NOT NULL,
+	minerals_tonnes BIGINT NOT NULL
+);

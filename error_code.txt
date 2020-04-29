@@ -1,0 +1,38 @@
+// Execute an SQL INSERT statement on the PostgreSQL server
+		Statement insert = connection.createStatement();
+		
+		PreparedStatement pst = connection.prepareStatement("sql");
+		
+		for ( Row row : rows ) {
+			Object emissions = row.getEmissions();
+			if ( row.getEmissions() == null ) {
+				emissions = 0;				
+			}
+			Object renewable = row.getRenewable();
+			if ( row.getRenewable() == null ) {
+				renewable = 0;
+			}
+			insert.execute("INSERT INTO world_data.finalproject_data (code_year, country, code, year, gdp, emissions, renewable) "
+			+ "values (\'" + row.getCode_year() + 
+			"\',\'" + row.getCountry() + 
+			"\',\'" + row.getCode() + 
+			"\',\'" + row.getYear() + 
+			"\',\'" + row.getGdp() + 
+			"\',\'" + emissions + 
+			"\',\'" + renewable + 
+			"\')");
+			
+			if ( emissions.equals(0) ) {
+				pst.setNull(6, java.sql.Types.DOUBLE);			
+			}
+			
+			if ( renewable.equals(0) ) {
+				pst.setNull(7, java.sql.Types.DOUBLE);			
+			}
+		}
+		insert.close();
+		
+		
+	}
+		
+ERROR: java.lang.NullPointerException
